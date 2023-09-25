@@ -26,6 +26,8 @@ class Planet(db.Model):
     climate = db.Column(db.String(255), nullable=True)
     terrain = db.Column(db.String(255), nullable=True)
     population = db.Column(db.String(255), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user = db.relationship("User")
 
     def __repr__(self):
         return '<Planet %r>' % self.name
@@ -37,6 +39,7 @@ class Planet(db.Model):
             "climate": self.climate,
             "terrain": self.terrain,
             "population": self.population,
+            "user_id": self.user_id,
         }
 
 
@@ -45,6 +48,8 @@ class People(db.Model):
     name = db.Column(db.String(255), nullable=False)
     birth_year = db.Column(db.String(255), nullable=True)
     gender = db.Column(db.String(255), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user = db.relationship("User")
 
     def __repr__(self):
         return '<People %r>' % self.name
@@ -55,4 +60,5 @@ class People(db.Model):
             "name": self.name,
             "birthYear": self.birth_year,
             "gender": self.gender,
+            "user_id": self.user_id,
         }
